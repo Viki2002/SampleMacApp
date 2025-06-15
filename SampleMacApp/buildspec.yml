@@ -1,0 +1,35 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      swift: latest
+    commands:
+      - echo Installing dependencies...
+      - xcode-select --install || true
+  
+  pre_build:
+    commands:
+      - echo Pre-build phase started...
+      - cd SampleMacApp
+      - xcodebuild -version
+  
+  build:
+    commands:
+      - echo Build started...
+      - xcodebuild clean build -project SampleMacApp.xcodeproj -scheme SampleMacApp -configuration Release -sdk macosx
+  
+  post_build:
+    commands:
+      - echo Build completed...
+      - mkdir -p artifacts
+
+artifacts:
+  files:
+    - SampleMacApp/build/Release/SampleMacApp.app/**/*
+    - appspec.yml
+  discard-paths: no
+
+cache:
+  paths:
+    - '/Users/codebuild/.cocoapods/**/*'
