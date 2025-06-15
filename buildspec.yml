@@ -11,7 +11,7 @@ phases:
   pre_build:
     commands:
       - echo Pre-build phase started...
-      - cd SampleMacApp
+      - ls -la
       - xcodebuild -version
   
   build:
@@ -26,7 +26,7 @@ phases:
 
 artifacts:
   files:
-    - SampleMacApp/build/Release/SampleMacApp.app/**/*
+    - build/Release/SampleMacApp.app/**/*
     - appspec.yml
   discard-paths: no
 
